@@ -2,50 +2,55 @@
 
 Ini adalah proyek website E-commerce sederhana yang dibangun menggunakan arsitektur Client-Server dengan Node.js dan Express.js. Website ini mensimulasikan toko online perlengkapan Padel dan dilengkapi dengan halaman admin untuk manajemen produk dan pesanan.
 
-## Fitur Utama
+## 🚀 Fitur
 
-### Frontend (User):
-- **Halaman Dinamis:** Produk ditampilkan secara dinamis dengan mengambil data dari API backend.
-- **Detail Produk:** Halaman detail untuk setiap produk, juga mengambil data dari API.
-- **Keranjang Belanja:** Fungsionalitas penuh (tambah, hapus, ubah kuantitas) dengan data disimpan di `localStorage`.
-- **Kode Voucher:** Sistem diskon sederhana.
-- **Checkout:** Mengirim data pesanan (alamat & item) ke API backend.
-- **Notifikasi Modern:** Menggunakan "toast notification".
-- **Fitur Tambahan:** Bagian "Produk Terkait" dan "Promo".
+* Frontend user-friendly untuk browsing produk, keranjang belanja, dan checkout.
+* Backend API dengan Node.js/Express untuk mengelola data produk dan pesanan.
+* Halaman admin untuk CRUD (Create, Read, Update, Delete) produk dan manajemen pesanan (termasuk update status & hapus).
+* Penyimpanan data produk dan pesanan menggunakan file JSON (`produk.json`, `pesanan.json`).
+* Fitur tambahan: kode voucher, gratis ongkir, produk terkait, notifikasi toast.
+* Desain responsif menggunakan TailwindCSS.
 
-### Backend (Admin & Server):
-- **API Server:** Dibangun dengan Node.js dan Express.js.
-- **Manajemen Produk (CRUD):** Halaman admin memungkinkan Tambah, Edit, dan Hapus produk.
-- **Manajemen Pesanan:** Halaman admin menampilkan daftar pesanan masuk dan memungkinkan perubahan status serta penghapusan pesanan.
-- **Penyimpanan Data:** Data produk disimpan di `produk.json` dan data pesanan disimpan di `pesanan.json` (persistent storage berbasis file).
-- **API Endpoints:**
-    - `GET /api/produk`: Mengambil semua produk.
-    - `GET /api/produk/:id`: Mengambil satu produk.
-    - `POST /api/produk`: Menambah produk baru.
-    - `PUT /api/produk/:id`: Mengedit produk.
-    - `DELETE /api/produk/:id`: Menghapus produk.
-    - `POST /api/pesanan`: Menerima pesanan baru.
-    - `GET /api/pesanan`: Mengambil semua pesanan.
-    - `PATCH /api/pesanan/:id`: Mengubah status pesanan.
-    - `DELETE /api/pesanan/:id`: Menghapus pesanan.
+## 🛠️ Prasyarat
 
-## Teknologi yang Digunakan
+Sebelum menjalankan proyek ini, pastikan Anda sudah menginstal perangkat lunak berikut di komputer Anda:
 
-- **Frontend:** HTML5, CSS3 (TailwindCSS via CDN), JavaScript (ES6)
-- **Backend:** Node.js, Express.js
-- **Data Storage:** File JSON (`produk.json`, `pesanan.json`)
+1.  **Git:** Untuk mengunduh (clone) repositori.
+    * Cek instalasi: Buka terminal dan ketik `git --version`.
+    * Unduh: [git-scm.com](https://git-scm.com/)
+2.  **Node.js (versi LTS direkomendasikan):** Untuk menjalankan server backend. Node.js akan otomatis menyertakan `npm` (Node Package Manager).
+    * Cek instalasi: Buka terminal dan ketik `node -v` dan `npm -v`.
+    * Unduh: [nodejs.org](https://nodejs.org/)
 
-## Cara Menjalankan
+## ⚙️ Instalasi & Menjalankan
 
-1.  **Jalankan Backend Server:**
-    * Buka terminal Anda.
-    * Arahkan ke folder `backend` (`cd path/to/GoPadel-Project/backend`).
-    * Jika ini pertama kali, jalankan `npm install` untuk menginstal dependensi.
-    * Jalankan server dengan `node server.js` atau (lebih baik) `nodemon server.js`. Server akan berjalan di `http://localhost:3000`.
+Ikuti langkah-langkah berikut untuk menjalankan proyek ini secara lokal:
 
-2.  **Buka Frontend:**
-    * Buka file `index.html` (yang ada di folder utama, **bukan** di dalam folder `backend`) di browser Anda.
+1.  **Clone Repositori:**
+    Buka terminal Anda, pindah ke direktori tempat Anda ingin menyimpan proyek, lalu jalankan:
+    ```bash
+    git clone [https://github.com/USERNAME/NAMA_REPO.git](https://github.com/USERNAME/NAMA_REPO.git)
+    cd NAMA_REPO
+    ```
+    *(Ganti `USERNAME/NAMA_REPO` dengan URL repositori ini).*
 
-## Catatan
+2.  **Instal Dependensi Backend:**
+    Masuk ke folder `backend` dan instal library Node.js yang diperlukan:
+    ```bash
+    cd backend
+    npm install
+    ```
 
-- File `produk.js` yang mungkin masih ada di folder utama sudah tidak digunakan lagi (deprecated). Semua data produk sekarang dikelola oleh backend melalui `produk.json`.
+3.  **Jalankan Server Backend:**
+    Masih di dalam folder `backend`, jalankan server:
+    ```bash
+    node server.js
+    ```
+    *(Atau gunakan `nodemon server.js` jika Anda menginstalnya, agar server otomatis restart saat ada perubahan kode).*
+    Server akan berjalan di `http://localhost:3000`. **Biarkan terminal ini tetap terbuka.**
+
+4.  **Akses Aplikasi:**
+    Buka browser web Anda dan kunjungi alamat:
+    **`http://localhost:3000`**
+
+    Server akan menyajikan halaman `index.html` dari folder `public`. Anda bisa mulai menggunakan website dan halaman admin (`http://localhost:3000/admin.html`)
