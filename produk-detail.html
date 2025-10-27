@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Produk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="Images/favicon-32x32.png">
+</head>
+<body class="antialiased text-gray-800 bg-gray-100">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-black">
+                Go<span class="text-padel">Padel</span>
+            </a>
+            <nav class="hidden md:flex space-x-8 font-semibold">
+                <a href="index.html#produk-unggulan" class="hover:text-padel transition duration-200">Produk Unggulan</a>
+                <a href="index.html#promo" class="hover:text-padel transition duration-200">Promo</a>
+                <a href="index.html#testimoni" class="hover:text-padel transition duration-200">Review</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="Keranjang.html" class="relative text-gray-600 hover:text-padel transition duration-200" aria-label="Keranjang Belanja">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l3 11h11l3-11H3zM9 21a1 1 0 100-2 1 1 0 000 2zM15 21a1 1 0 100-2 1 1 0 000 2z" />
+    </svg>
+    <span id="cart-badge" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">
+        0
+    </span>
+</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="py-12 md:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg flex flex-col lg:flex-row gap-8">
+                <div class="w-full lg:w-1/2">
+                    <img id="detail-gambar" src="" alt="Gambar Produk" class="w-full h-auto rounded-lg shadow-md">
+                </div>
+                <div class="w-full lg:w-1/2 flex flex-col">
+                    <h1 id="detail-nama" class="text-3xl sm:text-4xl font-black text-gray-900 mb-2"></h1>
+                    <p id="detail-harga" class="text-4xl font-extrabold text-red-600 mb-6"></p>
+                    <p id="detail-deskripsi" class="text-gray-600 leading-relaxed mb-6"></p>
+
+                    <h3 class="text-lg font-bold border-b pb-2 mb-3">Spesifikasi:</h3>
+                    <ul id="detail-spesifikasi" class="list-disc list-inside text-gray-600 space-y-2 mb-8"></ul>
+                    
+                    <div class="mt-auto pt-6">
+                        <div class="flex items-center gap-4 mb-4">
+                            <label for="kuantitas" class="font-bold">Kuantitas:</label>
+                            <input type="number" id="kuantitas" value="1" min="1" class="w-20 text-center border rounded-md p-2">
+                        </div>
+                        <button id="tombol-keranjang" class="w-full color-padel cta-button text-gray-900 font-bold py-4 rounded-full text-lg">
+                            + Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <a href="index.html#produk-unggulan" class="inline-block mt-8 text-padel font-semibold hover:underline">&larr; Kembali ke Daftar Produk</a>
+        </div>
+    </main>
+
+    <section class="py-16 bg-gray-50" id="produk-terkait">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-black text-center mb-12">Anda Mungkin Juga Suka</h2>
+            <div id="produk-terkait-container" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"></div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-6">
+                <h4 class="font-bold text-lg mb-2 text-gray-300">Kelompok GoPadel</h4>
+                <div class="text-gray-400 text-sm space-y-1">
+                    <p>Natasya Cahya Salsabila (2322477221)</p>
+                    <p>Diva Syabina Putri (2311477320)</p>
+                    <p>Naila Salsabila Haerumanda (2314476963)</p>
+                    <p>Alif Rifqi Dewadaru (2322476771)</p>
+                </div>
+            </div>
+            <p class="text-gray-500 text-xs pt-6 border-t border-gray-700">&copy; 2025 GoPadel. Dibuat dengan semangat Padel.</p>
+        </div>
+    </footer>
+
+    <div id="toast-notification"></div>
+    
+   <script>
+    // Fungsi untuk update badge keranjang
+    function updateCartBadge() {
+        const keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+        let totalItem = 0;
+        keranjang.forEach(item => { totalItem += item.kuantitas; });
+        const badge = document.getElementById('cart-badge');
+        if (badge) {
+            if (totalItem > 0) { badge.textContent = totalItem; badge.classList.remove('hidden'); }
+            else { badge.textContent = '0'; badge.classList.add('hidden'); }
+        }
+    }
+    const formatRupiah = (angka) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
+
+    function showToast(message) {
+        const toast = document.getElementById("toast-notification");
+        toast.textContent = message;
+        toast.className = "show";
+        setTimeout(function() { toast.className = toast.className.replace("show", ""); }, 3000);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        updateCartBadge(); // <-- Panggil saat DOM siap
+        const params = new URLSearchParams(window.location.search);
+        const idProduk = params.get('id');
+        const apiUrl = `http://localhost:3000/api/produk/${idProduk}`;
+
+        fetch(apiUrl)
+            .then(response => { if (!response.ok) throw new Error('Produk tidak ditemukan'); return response.json(); })
+            .then(produk => {
+                tampilkanDetailProduk(produk);
+                setupTombolKeranjang(produk);
+                tampilkanProdukTerkait(idProduk);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.querySelector('main').innerHTML = `<h1 class="text-center text-2xl font-bold">${error.message}</h1>`;
+                const produkTerkaitSection = document.getElementById('produk-terkait');
+                if (produkTerkaitSection) produkTerkaitSection.style.display = 'none';
+            });
+    });
+
+    function tampilkanDetailProduk(produk) {
+        document.title = produk.nama;
+        document.getElementById('detail-gambar').src = produk.gambar;
+        document.getElementById('detail-gambar').alt = produk.nama;
+        document.getElementById('detail-nama').textContent = produk.nama;
+        document.getElementById('detail-harga').textContent = formatRupiah(produk.harga);
+        document.getElementById('detail-deskripsi').textContent = produk.deskripsi;
+        const spekContainer = document.getElementById('detail-spesifikasi');
+        spekContainer.innerHTML = '';
+        produk.spesifikasi.forEach(spek => {
+            spekContainer.innerHTML += `<li>${spek}</li>`;
+        });
+    }
+
+    function setupTombolKeranjang(produk) {
+        const tombolKeranjang = document.getElementById('tombol-keranjang');
+        tombolKeranjang.addEventListener('click', () => {
+            const kuantitas = parseInt(document.getElementById('kuantitas').value);
+            let keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+            const produkDiKeranjang = keranjang.find(item => item.id === produk.id);
+            if (produkDiKeranjang) { produkDiKeranjang.kuantitas += kuantitas; }
+            else { keranjang.push({ id: produk.id, kuantitas: kuantitas }); }
+            localStorage.setItem('keranjang', JSON.stringify(keranjang));
+            showToast(`${produk.nama} berhasil ditambahkan!`);
+            updateCartBadge(); // <-- Panggil setelah menambah item
+        });
+    }
+
+    function tampilkanProdukTerkait(idProdukSaatIni) {
+        const containerTerkait = document.getElementById('produk-terkait-container');
+        const apiUrlSemuaProduk = 'http://localhost:3000/api/produk';
+        fetch(apiUrlSemuaProduk)
+            .then(response => response.json())
+            .then(semuaProduk => {
+                const produkLain = semuaProduk.filter(p => p.id !== idProdukSaatIni);
+                const acakProduk = produkLain.sort(() => 0.5 - Math.random());
+                const produkPilihan = acakProduk.slice(0, 4);
+                containerTerkait.innerHTML = '';
+                produkPilihan.forEach(p => {
+                    const kartuProdukHTML = `
+                        <div class="bg-white p-5 rounded-xl shadow-lg card-hover flex flex-col">
+                            <a href="produk-detail.html?id=${p.id}"><img src="${p.gambar}" alt="${p.nama}" class="rounded-lg mb-4 h-48 w-full object-cover"></a>
+                            <div class="flex justify-between items-center mb-2"><a href="produk-detail.html?id=${p.id}" class="flex-grow"><h3 class="text-lg font-bold truncate hover:text-padel">${p.nama}</h3></a><div class="text-sm font-semibold text-yellow-500">${'★'.repeat(p.rating)}</div></div>
+                            <p class="text-2xl font-extrabold text-gray-900 mb-3">${formatRupiah(p.harga)}</p>
+                            <a href="produk-detail.html?id=${p.id}" class="w-full text-center color-padel cta-button text-gray-900 font-bold py-3 rounded-full mt-auto">Lihat Detail</a>
+                        </div>`;
+                    containerTerkait.innerHTML += kartuProdukHTML;
+                });
+            })
+            .catch(error => {
+                console.error('Gagal memuat produk terkait:', error);
+                if(containerTerkait) containerTerkait.innerHTML = '<p>Gagal memuat produk terkait.</p>';
+            });
+    }
+</script>
+</body>
+</html>

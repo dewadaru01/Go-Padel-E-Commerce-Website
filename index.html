@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoPadel - Toko Online Perlengkapan Padel Terbaik</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="Images/favicon-32x32.png">
+</head>
+<body class="antialiased text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-black">
+                Go<span class="text-padel">Padel</span>
+            </a>
+            <nav class="hidden md:flex space-x-8 font-semibold">
+                <a href="#produk-unggulan" class="hover:text-padel transition duration-200">Produk Unggulan</a>
+                <a href="#promo" class="hover:text-padel transition duration-200">Promo</a>
+                <a href="#testimoni" class="hover:text-padel transition duration-200">Review</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="Keranjang.html" class="relative text-gray-600 hover:text-padel transition duration-200" aria-label="Keranjang Belanja">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l3 11h11l3-11H3zM9 21a1 1 0 100-2 1 1 0 000 2zM15 21a1 1 0 100-2 1 1 0 000 2z" />
+    </svg>
+    <span id="cart-badge" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">
+        0
+    </span>
+</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-gray-900 text-white" id="home">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+            <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
+                <span class="text-padel text-lg font-bold uppercase tracking-widest block mb-2">Musim Terbaru Telah Tiba!</span>
+                <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight mb-4">
+                    Tingkatkan Permainan Anda dengan <span class="text-padel">GoPadel</span>
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 max-w-lg">
+                    Temukan raket Padel terbaik, sepatu performa tinggi, dan aksesori dari merek ternama dunia.
+                </p>
+                <a href="#produk-unggulan" class="cta-button inline-block px-8 py-4 text-lg font-bold rounded-full text-gray-900 color-padel shadow-xl transform hover:scale-105">
+                    BELANJA SEKARANG
+                </a>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="https://image.idntimes.com/post/20241227/drop-shot-uk-cover-bf111ca59abd23afab47761176a35b3f-148ab11ed38a238415e17ac9b77fdbc4.jpeg?tr=w-1200,f-webp,q-75&width=1200&format=webp&quality=75" alt="Raket Padel Unggulan" class="rounded-xl shadow-2xl transform rotate-3 hover:rotate-0 transition duration-500 max-w-full h-auto">
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-white" id="produk-unggulan">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl sm:text-4xl font-black text-center mb-12">Pilihan Terbaik Para Profesional</h2>
+            <div id="daftar-produk" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-gray-50" id="promo">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl sm:text-4xl font-black text-center mb-12">Promo & Penawaran Spesial</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <a href="#" class="bg-white p-8 rounded-xl shadow-lg card-hover flex flex-col items-center text-center">
+                    <div class="color-padel rounded-full p-4 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l2 2h8a1 1 0 001-1z" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Gratis Ongkir</h3>
+                    <p class="text-gray-600">Nikmati gratis ongkos kirim ke seluruh Indonesia dengan minimal pembelian Rp 500.000.</p>
+                </a>
+                <a href="#" class="bg-white p-8 rounded-xl shadow-lg card-hover flex flex-col items-center text-center">
+                    <div class="color-padel rounded-full p-4 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Diskon 10% Raket Baru</h3>
+                    <p class="text-gray-600">Gunakan kode <span class="font-mono bg-gray-200 px-1 rounded">PADELNEWBIE</span> saat checkout.</p>
+                </a>
+                <a href="#" class="bg-white p-8 rounded-xl shadow-lg card-hover flex flex-col items-center text-center">
+                    <div class="color-padel rounded-full p-4 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Paket Bundling Pemula</h3>
+                    <p class="text-gray-600">Dapatkan raket, bola, dan tas dengan harga spesial.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-gray-900 text-white" id="testimoni">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl sm:text-4xl font-black mb-4">Dipercaya oleh Ribuan Pemain Padel</h2>
+            <div class="text-padel text-5xl mb-10">★★★★★</div>
+            <div class="grid md:grid-cols-3 gap-8 text-left">
+                <div class="bg-gray-800 p-6 rounded-xl shadow-xl"><p class="italic text-gray-300 mb-4">"Pengiriman super cepat dan raket 100% original..."</p><p class="font-bold text-white">- Rico, Jakarta</p></div>
+                <div class="bg-gray-800 p-6 rounded-xl shadow-xl"><p class="italic text-gray-300 mb-4">"Sepatunya pas dan nyaman..."</p><p class="font-bold text-white">- Maya, Surabaya</p></div>
+                <div class="bg-gray-800 p-6 rounded-xl shadow-xl"><p class="italic text-gray-300 mb-4">"Harga kompetitif, kualitas barang tidak perlu diragukan..."</p><p class="font-bold text-white">- Dika, Bandung</p></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-6">
+                <h4 class="font-bold text-lg mb-2 text-gray-300">Kelompok GoPadel</h4>
+                <div class="text-gray-400 text-sm space-y-1">
+                    <p>Natasya Cahya Salsabila (2322477221)</p>
+                    <p>Diva Syabina Putri (2311477320)</p>
+                    <p>Naila Salsabila Haerumanda (2314476963)</p>
+                    <p>Alif Rifqi Dewadaru (2322476771)</p>
+                </div>
+            </div>
+            <p class="text-gray-500 text-xs pt-6 border-t border-gray-700">&copy; 2025 GoPadel. Dibuat dengan semangat Padel.</p>
+        </div>
+    </footer>
+
+<script>
+    // Fungsi untuk update badge keranjang
+    function updateCartBadge() {
+        const keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+        let totalItem = 0;
+        keranjang.forEach(item => { totalItem += item.kuantitas; });
+        const badge = document.getElementById('cart-badge');
+        if (badge) {
+            if (totalItem > 0) {
+                badge.textContent = totalItem;
+                badge.classList.remove('hidden');
+            } else {
+                badge.textContent = '0';
+                badge.classList.add('hidden');
+            }
+        }
+    }
+
+    const containerProduk = document.getElementById('daftar-produk');
+    const formatRupiah = (angka) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
+    const apiUrl = 'http://localhost:3000/api/produk';
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(semuaProduk => {
+            containerProduk.innerHTML = ''; // Kosongkan dulu
+            semuaProduk.forEach(produk => {
+                const kartuProdukHTML = `
+                    <div class="bg-white p-5 rounded-xl shadow-lg card-hover flex flex-col">
+                        <a href="produk-detail.html?id=${produk.id}"><img src="${produk.gambar}" alt="${produk.nama}" class="rounded-lg mb-4 h-48 w-full object-cover"></a>
+                        <div class="flex justify-between items-center mb-2"><a href="produk-detail.html?id=${produk.id}" class="flex-grow"><h3 class="text-lg font-bold truncate hover:text-padel">${produk.nama}</h3></a><div class="text-sm font-semibold text-yellow-500">${'★'.repeat(produk.rating)}</div></div>
+                        <p class="text-2xl font-extrabold text-gray-900 mb-3">${formatRupiah(produk.harga)}</p>
+                        <a href="produk-detail.html?id=${produk.id}" class="w-full text-center color-padel cta-button text-gray-900 font-bold py-3 rounded-full mt-auto">Lihat Detail</a>
+                    </div>`;
+                containerProduk.innerHTML += kartuProdukHTML;
+            });
+            updateCartBadge(); // <-- Panggil setelah produk dimuat
+        })
+        .catch(error => {
+            console.error('Error mengambil data produk:', error);
+            containerProduk.innerHTML = '<p class="text-center text-red-500 col-span-4">Gagal memuat produk. Server backend berjalan?</p>';
+            updateCartBadge(); // <-- Panggil juga jika error agar badge tampil (0)
+        });
+
+    // Panggil juga saat DOM siap (opsional tapi aman)
+    document.addEventListener("DOMContentLoaded", updateCartBadge);
+</script>
+</body>
+</html>

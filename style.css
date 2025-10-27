@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.color-padel {
+    background-color: #7EE05F; 
+}
+
+.text-padel {
+    color: #7EE05F;
+}
+
+.cta-button {
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(126, 224, 95, 0.5);
+}
+
+.cta-button:hover {
+    background-color: #5BC940;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(126, 224, 95, 0.7);
+}
+
+.card-hover {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+#toast-notification {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+    position: fixed;
+    z-index: 100;
+    right: 30px;
+    bottom: 30px;
+    font-size: 17px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+#toast-notification.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}

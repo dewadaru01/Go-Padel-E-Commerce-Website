@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - GoPadel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="Images/favicon-32x32.png">
+</head>
+<body class="antialiased text-gray-800 bg-gray-100">
+
+    <header class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <h1 class="text-3xl font-black">
+                Admin <span class="text-padel">Dashboard</span>
+            </h1>
+        </div>
+    </header>
+
+    <main class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg mb-8">
+                <h2 id="form-title" class="text-2xl font-bold mb-6">Tambah Produk Baru</h2>
+                <form id="form-tambah-produk" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div><label for="nama" class="block text-sm font-semibold mb-1">Nama Produk</label><input type="text" id="nama" class="w-full border rounded-md px-3 py-2" required></div>
+                        <div><label for="harga" class="block text-sm font-semibold mb-1">Harga (Angka saja)</label><input type="number" id="harga" class="w-full border rounded-md px-3 py-2" required></div>
+                        <div><label for="rating" class="block text-sm font-semibold mb-1">Rating (1-5)</label><input type="number" id="rating" class="w-full border rounded-md px-3 py-2" min="1" max="5" required></div>
+                        <div><label for="gambar" class="block text-sm font-semibold mb-1">URL Gambar (e.g., Images/nama.webp)</label><input type="text" id="gambar" class="w-full border rounded-md px-3 py-2" required></div>
+                    </div>
+                    <div><label for="deskripsi" class="block text-sm font-semibold mb-1">Deskripsi</label><textarea id="deskripsi" rows="3" class="w-full border rounded-md px-3 py-2" required></textarea></div>
+                    <div><label for="spesifikasi" class="block text-sm font-semibold mb-1">Spesifikasi (Pisahkan dgn koma)</label><input type="text" id="spesifikasi" class="w-full border rounded-md px-3 py-2" placeholder="Spek 1, Spek 2" required></div>
+                    <button type="submit" class="w-full color-padel cta-button text-gray-900 font-bold py-3 rounded-full">Tambah Produk</button>
+                </form>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-lg mb-8">
+                <h2 class="text-2xl font-bold mb-6">Kelola Produk</h2>
+                <div id="daftar-kelola-produk" class="space-y-4"></div>
+            </div>
+            
+            <h2 class="text-2xl font-bold mb-6">Daftar Pesanan Masuk</h2>
+            <div id="daftar-pesanan" class="space-y-6"></div>
+        </div>
+    </main>
+
+<script>
+    const formProduk = document.getElementById('form-tambah-produk');
+    const formTitle = document.getElementById('form-title');
+    const formButton = formProduk.querySelector('button[type="submit"]');
+    let modeEdit = null;
+
+    formProduk.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const dataProduk = {
+            nama: document.getElementById('nama').value,
+            harga: parseInt(document.getElementById('harga').value),
+            rating: parseInt(document.getElementById('rating').value),
+            gambar: document.getElementById('gambar').value,
+            deskripsi: document.getElementById('deskripsi').value,
+            spesifikasi: document.getElementById('spesifikasi').value.split(',').map(item => item.trim())
+        };
+        const method = modeEdit ? 'PUT' : 'POST';
+        const url = modeEdit ? `${apiUrlProduk}/${modeEdit}` : apiUrlProduk;
+        fetch(url, { method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dataProduk) })
+            .then(response => { if (!response.ok) throw new Error(`Gagal ${modeEdit ? 'mengupdate' : 'menambah'} produk!`); return response.json(); })
+            .then(produk => { alert(`Produk "${produk.nama}" berhasil ${modeEdit ? 'diupdate' : 'ditambahkan'}!`); resetForm(); location.reload(); })
+            .catch(error => { console.error('Error:', error); alert('Terjadi kesalahan. Pastikan server berjalan.'); });
+    });
+    
+    function editProduk(produk) {
+        modeEdit = produk.id;
+        document.getElementById('nama').value = produk.nama;
+        document.getElementById('harga').value = produk.harga;
+        document.getElementById('rating').value = produk.rating;
+        document.getElementById('gambar').value = produk.gambar;
+        document.getElementById('deskripsi').value = produk.deskripsi;
+        document.getElementById('spesifikasi').value = produk.spesifikasi.join(', ');
+        formTitle.textContent = `Edit Produk: ${produk.nama}`;
+        formButton.textContent = 'Update Produk';
+        window.scrollTo(0, 0);
+    }
+
+    function resetForm() {
+        modeEdit = null;
+        formProduk.reset();
+        formTitle.textContent = 'Tambah Produk Baru';
+        formButton.textContent = 'Tambah Produk';
+    }
+
+    const containerPesanan = document.getElementById('daftar-pesanan');
+    const containerKelolaProduk = document.getElementById('daftar-kelola-produk');
+    const apiUrlPesanan = 'http://localhost:3000/api/pesanan';
+    const apiUrlProduk = 'http://localhost:3000/api/produk';
+
+    function hapusProduk(idProduk, namaProduk) {
+        if (!confirm(`Hapus produk "${namaProduk}"?`)) return;
+        fetch(`${apiUrlProduk}/${idProduk}`, { method: 'DELETE' })
+            .then(response => { if (!response.ok) throw new Error('Gagal menghapus produk'); return response.json(); })
+            .then(data => { alert(data.message); location.reload(); })
+            .catch(error => { console.error('Error:', error); alert('Gagal menghapus produk.'); });
+    }
+
+    function hapusPesanan(idPesanan) {
+        if (!confirm(`Hapus pesanan #${idPesanan}?`)) return;
+        fetch(`${apiUrlPesanan}/${idPesanan}`, { method: 'DELETE' })
+            .then(response => { if (!response.ok) throw new Error('Gagal menghapus pesanan'); return response.json(); })
+            .then(data => { alert(data.message); location.reload(); })
+            .catch(error => { console.error('Error:', error); alert('Gagal menghapus pesanan.'); });
+    }
+    
+    function updateStatusPesanan(idPesanan, selectElement) {
+        const statusBaru = selectElement.value;
+        fetch(`${apiUrlPesanan}/${idPesanan}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: statusBaru }) })
+            .then(response => { if (!response.ok) throw new Error('Gagal update status'); return response.json(); })
+            .then(data => { 
+                alert(`Status pesanan #${idPesanan} diubah menjadi "${data.status}"`);
+                const statusBadge = document.getElementById(`status-${idPesanan}`);
+                statusBadge.textContent = data.status;
+                statusBadge.className = 'text-xs font-bold px-2 py-1 rounded-full ' + getStatusColor(data.status);
+            })
+            .catch(error => { console.error('Error:', error); alert('Gagal update status.'); });
+    }
+    
+    function getStatusColor(status) {
+        switch (status) {
+            case 'Diproses': return 'bg-yellow-200 text-yellow-800';
+            case 'Terkirim': return 'bg-blue-200 text-blue-800';
+            case 'Selesai': return 'bg-green-200 text-green-800';
+            default: return 'bg-gray-200 text-gray-800';
+        }
+    }
+
+    Promise.all([
+        fetch(apiUrlPesanan).then(res => res.json()),
+        fetch(apiUrlProduk).then(res => res.json())
+    ])
+    .then(([semuaPesanan, semuaProduk]) => {
+        // Tampilkan Pesanan
+        if (semuaPesanan.length === 0) {
+            containerPesanan.innerHTML = '<p class="text-center text-gray-500 py-8">Belum ada pesanan masuk.</p>';
+        } else {
+            semuaPesanan.reverse();
+            containerPesanan.innerHTML = '';
+            semuaPesanan.forEach(pesanan => {
+                let itemHTML = pesanan.item.map(item => {
+                    const pDetail = semuaProduk.find(p => p.id === item.id);
+                    const pNama = pDetail ? pDetail.nama : 'Produk Tidak Ditemukan';
+                    return `<li>${item.kuantitas}x - ${pNama} <span class="text-gray-500">(${item.id})</span></li>`;
+                }).join('');
+                const kartuPesananHTML = `<div class="bg-white p-6 rounded-xl shadow-lg"><div class="flex justify-between items-start border-b pb-4 mb-4"><div><div class="flex items-center gap-3"><h3 class="font-bold text-lg">Pesanan #${pesanan.idPesanan}</h3><span id="status-${pesanan.idPesanan}" class="text-xs font-bold px-2 py-1 rounded-full ${getStatusColor(pesanan.status)}">${pesanan.status || 'Baru'}</span></div><p class="text-sm text-gray-500">Tanggal: ${new Date(pesanan.tanggalPesan).toLocaleString('id-ID')}</p></div><div class="text-right"><p class="font-bold text-xl text-padel">${pesanan.total}</p></div></div><div class="grid md:grid-cols-2 gap-4"><div><h4 class="font-bold mb-1">Pelanggan:</h4><p class="text-sm">${pesanan.pelanggan.nama}</p><p class="text-sm">${pesanan.pelanggan.telepon}</p><p class="text-sm">${pesanan.pelanggan.alamat}, ${pesanan.pelanggan.kota}</p></div><div><h4 class="font-bold mb-1">Item:</h4><ul class="list-disc list-inside text-sm">${itemHTML}</ul></div></div><div class="mt-4 pt-4 border-t flex justify-between items-center"><div><label for="status-select-${pesanan.idPesanan}" class="text-sm font-semibold">Ubah Status:</label><select id="status-select-${pesanan.idPesanan}" onchange="updateStatusPesanan(${pesanan.idPesanan}, this)" class="mt-1 p-2 border rounded-md"><option value="Baru" ${pesanan.status === 'Baru' ? 'selected' : ''}>Baru</option><option value="Diproses" ${pesanan.status === 'Diproses' ? 'selected' : ''}>Diproses</option><option value="Terkirim" ${pesanan.status === 'Terkirim' ? 'selected' : ''}>Terkirim</option><option value="Selesai" ${pesanan.status === 'Selesai' ? 'selected' : ''}>Selesai</option></select></div><button onclick="hapusPesanan(${pesanan.idPesanan})" class="text-sm bg-red-500 text-white px-3 py-2 rounded hover:bg-red-600">Hapus Pesanan</button></div></div>`;
+                containerPesanan.innerHTML += kartuPesananHTML;
+            });
+        }
+
+        // Tampilkan Produk untuk Dikelola
+        if (semuaProduk.length === 0) {
+            containerKelolaProduk.innerHTML = '<p>Tidak ada produk.</p>';
+        } else {
+            containerKelolaProduk.innerHTML = '';
+            semuaProduk.forEach(produk => {
+                const produkHTML = `<div class="flex items-center justify-between p-3 border rounded-lg"><div><p class="font-bold">${produk.nama}</p><p class="text-sm text-gray-500">${produk.id}</p></div><div class="flex space-x-2"><button onclick='editProduk(${JSON.stringify(produk)})' class="text-sm bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Edit</button><button onclick="hapusProduk('${produk.id}', '${produk.nama}')" class="text-sm bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Hapus</button></div></div>`;
+                containerKelolaProduk.innerHTML += produkHTML;
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Gagal memuat data:', error);
+        containerPesanan.innerHTML = '<p class="text-red-500 text-center">Gagal memuat data. Pastikan server berjalan.</p>';
+        containerKelolaProduk.innerHTML = '<p class="text-red-500 text-center">Gagal memuat data produk.</p>';
+    });
+</script>
+</body>
+</html>

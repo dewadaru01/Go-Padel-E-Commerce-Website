@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - GoPadel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="Images/favicon-32x32.png">
+</head>
+<body class="antialiased text-gray-800 bg-gray-100">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-black">
+                Go<span class="text-padel">Padel</span>
+            </a>
+            <a href="Keranjang.html" class="relative text-gray-600 hover:text-padel transition duration-200" aria-label="Keranjang Belanja">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l3 11h11l3-11H3zM9 21a1 1 0 100-2 1 1 0 000 2zM15 21a1 1 0 100-2 1 1 0 000 2z" />
+    </svg>
+    <span id="cart-badge" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">
+        0
+    </span>
+</a>
+        </div>
+    </header>
+
+    <main class="py-12 md:py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl sm:text-4xl font-black text-center mb-10">Checkout</h1>
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="w-full lg:w-2/3 bg-white p-6 rounded-xl shadow-lg">
+                    <h2 class="text-2xl font-bold mb-6 border-b pb-4">Alamat Pengiriman</h2>
+                    <form id="form-checkout" class="space-y-4">
+                        <div>
+                            <label for="nama-lengkap" class="block text-sm font-semibold mb-1">Nama Lengkap</label>
+                            <input type="text" id="nama-lengkap" class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" required>
+                        </div>
+                        <div>
+                            <label for="telepon" class="block text-sm font-semibold mb-1">Nomor Telepon</label>
+                            <input type="tel" id="telepon" class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" required oninput="validateNumericInput(this)">
+                        </div>
+                        <div>
+                            <label for="alamat" class="block text-sm font-semibold mb-1">Alamat Lengkap</label>
+                            <textarea id="alamat" rows="3" class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" required></textarea>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-1/2">
+                                <label for="kota" class="block text-sm font-semibold mb-1">Kota</label>
+                                <input type="text" id="kota" class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" required>
+                            </div>
+                            <div class="w-1/2">
+                                <label for="kode-pos" class="block text-sm font-semibold mb-1">Kode Pos</label>
+                                <input type="text" id="kode-pos" class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" required oninput="validateNumericInput(this)">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="w-full lg:w-1/3">
+                    <div class="bg-white p-6 rounded-xl shadow-lg sticky top-28">
+                        <h2 class="text-2xl font-bold border-b pb-4 mb-4">Ringkasan Pesanan</h2>
+                        <div id="daftar-item-ringkasan" class="space-y-2 mb-4"></div>
+                        <div class="space-y-3 text-gray-700 border-t pt-4">
+                            <div class="flex justify-between"><span id="jumlah-item">Subtotal (0 item)</span><span id="subtotal-harga" class="font-semibold">Rp 0</span></div>
+                            <div class="flex justify-between"><span id="label-pengiriman">Biaya Pengiriman</span><span id="biaya-pengiriman" class="font-semibold">Rp 0</span></div>
+                            <div id="baris-diskon" class="flex justify-between text-green-600 hidden"><span>Diskon Voucher</span><span id="jumlah-diskon" class="font-semibold">- Rp 0</span></div>
+                            <div class="pt-4 border-t"><div class="flex justify-between items-center text-gray-900"><span class="text-xl font-bold">Total</span><span id="total-harga" class="text-2xl font-extrabold text-padel">Rp 0</span></div></div>
+                        </div>
+                        <button type="submit" form="form-checkout" class="w-full color-padel cta-button text-gray-900 font-bold py-3 rounded-full mt-6">Bayar Sekarang</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="bg-gray-800 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-6">
+                <h4 class="font-bold text-lg mb-2 text-gray-300">Kelompok GoPadel</h4>
+                <div class="text-gray-400 text-sm space-y-1">
+                    <p>Natasya Cahya Salsabila (2322477221)</p>
+                    <p>Diva Syabina Putri (2311477320)</p>
+                    <p>Naila Salsabila Haerumanda (2314476963)</p>
+                    <p>Alif Rifqi Dewadaru (2322476771)</p>
+                </div>
+            </div>
+            <p class="text-gray-500 text-xs pt-6 border-t border-gray-700">&copy; 2025 GoPadel. Dibuat dengan semangat Padel.</p>
+        </div>
+    </footer>
+
+    <div id="toast-notification"></div>
+
+<script>
+    // Fungsi untuk update badge keranjang
+    function updateCartBadge() {
+        const keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+        let totalItem = 0;
+        keranjang.forEach(item => { totalItem += item.kuantitas; });
+        const badge = document.getElementById('cart-badge');
+        if (badge) {
+            if (totalItem > 0) { badge.textContent = totalItem; badge.classList.remove('hidden'); }
+            else { badge.textContent = '0'; badge.classList.add('hidden'); }
+        }
+    }
+    function showToast(message) { /* ... (fungsi tidak berubah) ... */ }
+    function validateNumericInput(inputElement) { /* ... (fungsi tidak berubah) ... */ }
+    const VOUCHERS = { "PADELNEWBIE": 0.1, "GOPADEL15": 0.15 };
+    const formatRupiah = (angka) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
+
+    function tampilkanRingkasan(semuaProduk) {
+        const keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+        const kodeVoucherAktif = localStorage.getItem('voucher') || null;
+        if (keranjang.length === 0) { window.location.href = 'Keranjang.html'; return; }
+        let subtotal = 0;
+        let totalItem = 0;
+        const itemContainer = document.getElementById('daftar-item-ringkasan');
+        itemContainer.innerHTML = '';
+        keranjang.forEach(item => {
+            const produkDetail = semuaProduk.find(p => p.id === item.id);
+            if (produkDetail) {
+                subtotal += produkDetail.harga * item.kuantitas;
+                totalItem += item.kuantitas;
+                itemContainer.innerHTML += `<div class="flex justify-between text-sm"><span class="truncate">${produkDetail.nama} (x${item.kuantitas})</span><span class="font-semibold">${formatRupiah(produkDetail.harga * item.kuantitas)}</span></div>`;
+            }
+        });
+        let nilaiDiskon = 0;
+        if (kodeVoucherAktif && VOUCHERS[kodeVoucherAktif]) {
+            nilaiDiskon = subtotal * VOUCHERS[kodeVoucherAktif];
+            document.getElementById('jumlah-diskon').textContent = `- ${formatRupiah(nilaiDiskon)}`;
+            document.getElementById('baris-diskon').classList.remove('hidden');
+        } else {
+             document.getElementById('baris-diskon').classList.add('hidden'); // Pastikan disembunyikan jika tidak ada
+        }
+        const labelPengirimanEl = document.getElementById('label-pengiriman');
+        const biayaPengirimanEl = document.getElementById('biaya-pengiriman');
+        const biayaPengiriman = (subtotal >= 500000) ? 0 : 25000;
+        if (biayaPengiriman === 0 && keranjang.length > 0) {
+            if(labelPengirimanEl) labelPengirimanEl.textContent = 'Pengiriman (Gratis!)';
+            biayaPengirimanEl.classList.add('text-green-600');
+        } else {
+            if(labelPengirimanEl) labelPengirimanEl.textContent = 'Biaya Pengiriman';
+            biayaPengirimanEl.classList.remove('text-green-600');
+        }
+        const totalKeseluruhan = subtotal + biayaPengiriman - nilaiDiskon;
+        document.getElementById('jumlah-item').textContent = `Subtotal (${totalItem} item)`;
+        document.getElementById('subtotal-harga').textContent = formatRupiah(subtotal);
+        biayaPengirimanEl.textContent = formatRupiah(biayaPengiriman);
+        document.getElementById('total-harga').textContent = formatRupiah(totalKeseluruhan < 0 ? 0 : totalKeseluruhan);
+
+        updateCartBadge(); // <-- Panggil di akhir setelah semua kalkulasi
+    }
+
+    const formCheckout = document.getElementById('form-checkout');
+    formCheckout.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const dataPelanggan = {
+            nama: document.getElementById('nama-lengkap').value,
+            telepon: document.getElementById('telepon').value,
+            alamat: document.getElementById('alamat').value,
+            kota: document.getElementById('kota').value,
+            kodePos: document.getElementById('kode-pos').value,
+        };
+        const itemKeranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+        if (itemKeranjang.length === 0) { showToast("Keranjang kosong."); return; }
+        fetch('http://localhost:3000/api/pesanan', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pelanggan: dataPelanggan, item: itemKeranjang, total: document.getElementById('total-harga').textContent }),
+        })
+        .then(response => { if (!response.ok) throw new Error('Server error!'); return response.json(); })
+        .then(data => {
+            console.log('Server response:', data);
+            showToast('Pesanan berhasil dibuat!');
+            localStorage.removeItem('keranjang');
+            localStorage.removeItem('voucher');
+            setTimeout(() => { window.location.href = 'konfirmasi.html'; }, 1500);
+        })
+        .catch(error => {
+            console.error('Error saat kirim pesanan:', error);
+            showToast('Gagal membuat pesanan. Server berjalan?');
+        });
+    });
+
+    updateCartBadge(); // <-- Panggil saat script dimuat
+    fetch('http://localhost:3000/api/produk')
+        .then(res => res.json())
+        .then(semuaProduk => {
+            tampilkanRingkasan(semuaProduk); // Ini akan memanggil updateCartBadge() lagi
+        })
+        .catch(err => {
+            console.error("Gagal memuat detail produk:", err);
+            const ringkasanContainer = document.querySelector('.w-full.lg\\:w-1\\/3 .bg-white');
+            if (ringkasanContainer) ringkasanContainer.innerHTML = '<p class="text-red-500 text-center">Gagal memuat ringkasan. Server backend berjalan?</p>';
+            updateCartBadge(); // Panggil agar badge tetap 0 jika error
+        });
+</script>
+</body>
+</html>
