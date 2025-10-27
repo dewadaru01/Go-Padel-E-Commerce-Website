@@ -2,7 +2,7 @@
 
 Ini adalah proyek website E-commerce sederhana yang dibangun menggunakan arsitektur Client-Server dengan Node.js dan Express.js. Website ini mensimulasikan toko online perlengkapan Padel dan dilengkapi dengan halaman admin untuk manajemen produk dan pesanan.
 
-## 🚀 Fitur
+#Fitur
 
 * Frontend user-friendly untuk browsing produk, keranjang belanja, dan checkout.
 * Backend API dengan Node.js/Express untuk mengelola data produk dan pesanan.
@@ -11,7 +11,7 @@ Ini adalah proyek website E-commerce sederhana yang dibangun menggunakan arsitek
 * Fitur tambahan: kode voucher, gratis ongkir, produk terkait, notifikasi toast.
 * Desain responsif menggunakan TailwindCSS.
 
-## 🛠️ Prasyarat
+#Prasyarat
 
 Sebelum menjalankan proyek ini, pastikan Anda sudah menginstal perangkat lunak berikut di komputer Anda:
 
@@ -22,7 +22,7 @@ Sebelum menjalankan proyek ini, pastikan Anda sudah menginstal perangkat lunak b
     * Cek instalasi: Buka terminal dan ketik `node -v` dan `npm -v`.
     * Unduh: [nodejs.org](https://nodejs.org/)
 
-## ⚙️ Instalasi & Menjalankan
+#Instalasi & Running
 
 Ikuti langkah-langkah berikut untuk menjalankan proyek ini secara lokal:
 
